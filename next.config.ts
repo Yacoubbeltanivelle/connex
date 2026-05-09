@@ -1,8 +1,14 @@
 import type { NextConfig } from "next";
 
+const isGithubPages = process.env.GITHUB_ACTIONS === "true";
+
 const nextConfig: NextConfig = {
+  output: "export",
+  basePath: isGithubPages ? "/connex" : undefined,
+  assetPrefix: isGithubPages ? "/connex/" : undefined,
   compress: true,
   images: {
+    unoptimized: true,
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
